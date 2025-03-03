@@ -91,10 +91,21 @@ public:
     unsigned long getNFace(){  return nFace; }
     unsigned long getNTetrahedron() { return nTetrahedron; }
     unsigned long getNBoundary() { return nBoundary; }
+    unsigned long *boundary(){ return boundary_; }
     double *x_coord(){  return x_; }
     double *y_coord(){  return y_; }
     double *z_coord(){  return z_; }
-    unsigned long *boundary(){ return boundary_; }
+    void setX(double* x){ for(unsigned long i=0; i<nVertex; i++){x_[i]= x[i];}}
+    void setY(double* y){ for(unsigned long i=0; i<nVertex; i++){y_[i]= y[i];}}
+    void setZ(double* z){ for(unsigned long i=0; i<nVertex; i++){z_[i]= z[i];}}
+
+    void setTetrahedron(unsigned long* tet[4]){
+        for(int i=0; i< 4; ++i){
+            for(unsigned long j=0; j<nTetrahedron; j++){
+                tet_[i][j] = tet[i][j];
+            }
+        }
+    }
 
     unsigned long **tetrahedron()  { return tet_; }
     unsigned long **face_info() { return faces_; }

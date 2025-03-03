@@ -82,11 +82,22 @@ public:
     unsigned long getNEdge()  {  return nEdge;   }
     unsigned long getNTriangle() { return nTriangle; }
     unsigned long getNBoundary() { return nBoundary; }
+    unsigned long *boundary() { return boundary_; }
     double *x_coord(){  return x_; }
     double *y_coord(){  return y_; }
     double *z_coord(){  return z_; }
-    unsigned long *boundary() { return boundary_; }
+    void setX(double* x){ for(unsigned long i=0; i<nVertex; i++){x_[i]= x[i];}}
+    void setY(double* y){ for(unsigned long i=0; i<nVertex; i++){y_[i]= y[i];}}
+    void setZ(double* z){ for(unsigned long i=0; i<nVertex; i++){z_[i]= z[i];}}
 
+    void setTriangle(unsigned long* tri[3]){
+        for(int i=0; i< 3; ++i){
+            for(unsigned long j=0; j<nTriangle; j++){
+                tri_[i][j] = tri[i][j];
+            }
+        }
+    }
+    
     unsigned long **triangle()  { return tri_; }
     unsigned long **edge_info() { return edges_;}
     unsigned long **tri_edge_connection() {  return tri_edge_conn_; }
