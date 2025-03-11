@@ -1,17 +1,15 @@
 #include "mesh_structure/TetrahedronMesh.h"
 
 // 标准C++不提供去除首尾空格的库函数，但利用string也可以实现此功能
-string TetrahedronMesh::trim(string s) {
-    if (s.empty()) { return s; }
-    s.erase(0, s.find_first_not_of(' '));
-    s.erase(s.find_last_not_of(' ') + 1);
-    // 注意linux和Windows文件格式的区别：
-    // 当linux上的代码读取Windows文件格式时， 读取结果的每行都会多一个\r
-    // 因而此处需要删除\r
-    size_t pos=s.find_last_of('\r');    // 当linux上的代码读取Windows文件格式时， 读取结果的每行都会多一个\r
-    if (pos != std::string::npos){         // 因而可能需要删除这个额外的\r
-        s.erase(pos);
-    }
+std::string TetrahedronMesh::trim(std::string s) {
+    if (s.empty()) return s;
+
+    // 删除首部的空白字符（空格、制表符、回车、换行）
+    s.erase(0, s.find_first_not_of(" \t\r\n"));
+
+    // 删除尾部的空白字符（空格、制表符、回车、换行）
+    s.erase(s.find_last_not_of(" \t\r\n") + 1);
+
     return s;
 }
 
