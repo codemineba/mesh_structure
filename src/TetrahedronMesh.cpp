@@ -113,7 +113,7 @@ void TetrahedronMesh::find_vertex_tetrahedron_connection(std::vector<unsigned lo
 void TetrahedronMesh::collect_faces(){
     int max_nface_each_vertex = 300;
     std::vector<std::tuple<unsigned long, unsigned long,unsigned long,unsigned long,unsigned long>> faces;
-    int** localface = new int* [max_nface_each_vertex];
+    int* localface[max_nface_each_vertex];
     nFace=0;
     for (int i=0; i<max_nface_each_vertex; i++){
         localface[i]=new int[nVertex];
@@ -181,7 +181,7 @@ void TetrahedronMesh::collect_faces(){
         unsigned long ik = faces_[3][j], ik_ = faces_[4][j];
         for (unsigned long i = 0; i < 4; ++i){  // order of ik and ik_
             if (tet_face_conn_[i][ik] == j) { face_order_in_tet_[0][j] = i;}
-            if (tet_face_conn_[i][ik_] == j) {face_order_in_tet_[1][j] = i;}
+            if (ik_ < nTetrahedron && tet_face_conn_[i][ik_] == j) {face_order_in_tet_[1][j] = i;}
         } 
     }
     // get boundary

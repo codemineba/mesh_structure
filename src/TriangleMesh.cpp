@@ -192,7 +192,7 @@ void TriangleMesh::collect_edges(){
         unsigned long ik = edges_[2][j], ik_ = edges_[3][j];
         for (unsigned long i = 0; i < 3; ++i){  // order of ik and ik_
             if (tri_edge_conn_[i][ik] == j) { edge_order_in_tri_[0][j] = i;}
-            if (tri_edge_conn_[i][ik_] == j) {edge_order_in_tri_[1][j] = i;}
+            if (ik_< nTriangle && tri_edge_conn_[i][ik_] == j) {edge_order_in_tri_[1][j] = i;}
         } 
     }
     // get boundary
